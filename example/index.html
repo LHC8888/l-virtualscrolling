@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    ul {
+      height: 400px;
+      overflow: auto;
+      width: 70%;
+    }
+
+    li {
+      list-style: none;
+      height: 40px;
+      line-height: 40px;
+    }
+  </style>
+</head>
+
+<body>
+  <ul id="list"></ul>
+  <script src="../src/index.js"></script>
+  <script>
+    function randomColor() {
+      var col = "#";
+      for (var i = 0; i < 6; i++) col += parseInt(Math.random() * 16).toString(16);
+      return col;
+    }
+
+    function renderItem(count) {
+      const list = document.querySelector('#list')
+      const df = document.createDocumentFragment()
+      for (let i = 0; i < count; i++) {
+        const item = document.createElement('li')
+        item.textContent = `${i}`
+        item.style = `background: ${randomColor()};`
+        df.appendChild(item)
+      }
+      list.appendChild(df)
+
+    }
+
+    renderItem(100000 / 1000)
+
+    var data = []
+
+    // 需要知道数据
+    // 需要知道容器
+    new LVirtaulScrolling({
+      container: '#list',
+      data: data
+    })
+  </script>
+</body>
+
+</html>
