@@ -7,13 +7,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <style>
-    ul {
+    #list {
       height: 400px;
       overflow: auto;
       width: 70%;
+      margin-top: 100px;
     }
 
-    li {
+    .item {
       list-style: none;
       height: 40px;
       line-height: 40px;
@@ -22,8 +23,13 @@
 </head>
 
 <body>
-  <ul id="list"></ul>
-  <script src="../src/index.js"></script>
+  <div id="list"></div>
+
+  <script src="./index.js"></script>
+  <script>
+
+  </script>
+  <!-- <script src="../src/index.js"></script>
   <script>
     function randomColor() {
       var col = "#";
@@ -41,20 +47,24 @@
         df.appendChild(item)
       }
       list.appendChild(df)
-
     }
 
     renderItem(100000 / 1000)
 
+    var start = 0
+    var length = 20
     var data = []
 
     // 需要知道数据
     // 需要知道容器
-    new LVirtaulScrolling({
-      container: '#list',
+    const list = document.querySelector('#list')
+    const vlist = new LVirtaulScrolling({
+      container: list,
       data: data
     })
-  </script>
+    console.log(vlist);
+
+  </script> -->
 </body>
 
 </html>
