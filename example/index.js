@@ -15,7 +15,7 @@ let virtualStart = 0 // 虚拟列表显示的第一个节点在原列表data中�
 let virtualCount = listRect.height / itemHeight// 虚拟列表显示出来的项目个数 = 列表容器高度 / 子元素高度， 
 let virtualEnd = virtualStart + virtualCount - 1 // 虚拟列表显示的最后一个节点在愿列表data中的索引，随着列表滚动会发生变化，
 const more = 4 // 为了防止出现白屏，保证滚动流畅，多渲染 more 个
-const singleMore = more / 2
+const singleMore = more / 2 // 在可视的区域之外上下各增多两个列表项
 
 // list 作为外部的容器 保持高度不变，并且可滚动
 // 新建一个中间容器存放列表项节点，用来撑开list，让外部容器的滚动条尺寸保持正确
@@ -122,8 +122,7 @@ function setPadding(scrollTop) {
     //   middle.style.paddingTop = `${scrollTop - singleMore * itemHeight}px`
     //   middle.style.paddingBottom = (data.length - virtualData.length) * itemHeight - (scrollTop - singleMore * itemHeight) + 'px'
     // }
-
-    if (virtualStart < singleMore) {
+    if (virtualStart <= singleMore) {
       middle.style.paddingTop = 0
       middle.style.paddingBottom = '240px'
     } else if (virtualStart + virtualCount >= data.length - singleMore) {
@@ -138,7 +137,7 @@ function setPadding(scrollTop) {
 
 // 动态计算索引 virtualStart
 function calcVirtualStartIndex(scrollTop, isDown) {
-  return isDown? parseInt(scrollTop / itemHeight) : Math.ceil(scrollTop / itemHeight)
+  return isDown ? parseInt(scrollTop / itemHeight) : Math.ceil(scrollTop / itemHeight)
   // console.log('virtual Start ', virtualStart);
 }
 
@@ -196,5 +195,5 @@ list.addEventListener('scroll', e => {
     setPadding(scrollTop)
   }
   // logScrollingInfo()
-  
+
 })
